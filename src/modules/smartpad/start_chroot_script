@@ -77,11 +77,11 @@ echo_green "Install Retropie...(DONE)"
 
 echo_green "Change name Retropie..."
 # Nouveau nom d'hôte
-NEW_HOSTNAME="smartpiretro"
+"${NEW_HOSTNAME}"="smartpiretro"
 # Modifier le fichier /etc/hostname
-echo "$NEW_HOSTNAME" | sudo tee /etc/hostname
+echo "${NEW_HOSTNAME}" | sudo tee /etc/hostname
 # Modifier le fichier /etc/hosts
-sudo sed -i "s/$(hostname)/$NEW_HOSTNAME/g" /etc/hosts
+sudo sed -i "s/$(hostname)/"${NEW_HOSTNAME}"/g" /etc/hosts
 echo_green "Change name Retropie...(DONE)"
 
 echo_green "Install filebrowser..."
