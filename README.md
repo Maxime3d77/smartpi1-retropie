@@ -49,7 +49,7 @@ Nous avons intégré un outil pratique de gestion de fichiers pour vous permettr
     Nom d'utilisateur : admin
     Mot de passe : admin
 - Naviguez vers le dossier des ROMs et téléchargez vos fichiers de jeux.
-- 
+
 Cette fonctionnalité vous offre une méthode simple et rapide pour gérer vos ROMs sans avoir à utiliser des outils de transfert de fichiers séparés.
 
 ## Support et Contributions
