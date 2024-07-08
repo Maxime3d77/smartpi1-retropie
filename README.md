@@ -1,47 +1,48 @@
 <p align="center">
-<img src="https://wiki.yumi-lab.com/img/YUMIOS/YUMIOS_LOGO.jpg" style="width:50%" >
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/RetroPie-Logo.svg/2560px-RetroPie-Logo.svg.png" style="width:50%" >
 </p>
 
-# YumiOS
+# RetroPie pour Nano Computer SmartPi1
+Bienvenue dans le projet RetroPie pour Nano Computer SmartPi1 ! Cette distribution est spécialement adaptée pour fonctionner de manière optimale sur la carte SmartPi1, vous offrant une expérience de jeu rétro fluide et agréable.
 
-A [Armbian](https://www.armbian.com) based distribution for Yumi Lab Smartpi and Smartpad.
+À propos de RetroPie
+RetroPie est une distribution populaire pour le rétro-gaming, basée sur Raspbian, qui vous permet d'émuler une large gamme de consoles de jeux vidéo classiques sur votre Raspberry Pi ou tout autre matériel compatible. Avec RetroPie, vous pouvez transformer votre Nano Computer SmartPi1 en une machine de jeu rétro puissante et polyvalente.
 
-This repository is a modified version of [MainsailOS](https://github.com/mainsail-crew/MainsailOS).
-We need to clarify that these to projects are **not** connected in any kind or form.
+Caractéristiques de la distribution
+Optimisation matérielle : Configurations spécifiques pour tirer le meilleur parti de la carte SmartPi1.
+Facilité d'installation : Un processus d'installation simplifié pour vous permettre de démarrer rapidement.
+Support étendu des émulateurs : Prise en charge de nombreux émulateurs de consoles classiques comme NES, SNES, Sega Genesis, PlayStation et bien d'autres.
+Interface utilisateur intuitive : Interface conviviale pour naviguer facilement entre les jeux et les émulateurs.
+Personnalisation avancée : Options de personnalisation pour ajuster l'apparence et les performances selon vos préférences.
+Installation
+Pour installer RetroPie sur votre Nano Computer SmartPi1, suivez ces étapes :
 
-If you need any kind of support please contact [Yumi Lab](https://wiki.yumi-lab.com)
+Télécharger l'image : Téléchargez l'image RetroPie spécialement adaptée pour SmartPi1 depuis le lien de téléchargement.
+Flasher l'image : Utilisez un outil comme Etcher pour flasher l'image sur une carte microSD.
+Insérer la carte microSD : Insérez la carte microSD dans votre SmartPi1.
+Démarrer le système : Allumez votre SmartPi1 et suivez les instructions à l'écran pour terminer l'installation et la configuration initiale.
+Configuration et Utilisation
+Connexion Wi-Fi
+Pour connecter votre SmartPi1 à un réseau Wi-Fi, suivez la même procédure que pour une distribution Armbian :
 
-Further more [mainsail-crew](https://github.com/mainsail-crew) will **not** provide support for our YumiOS.
+Ouvrez un terminal sur votre SmartPi1.
+Lancez l'outil de configuration Armbian en entrant la commande suivante :
+bash
+Copier le code
+sudo armbian-config
+Naviguez vers la section Réseau et suivez les instructions à l'écran pour configurer votre connexion Wi-Fi.
+Ajouter des ROMs via File Browser
+Nous avons intégré un outil pratique de gestion de fichiers pour vous permettre d'ajouter facilement des ROMs via votre navigateur web. Pour accéder à cet outil, suivez ces étapes :
 
-# What is YumiOS?
+Ouvrez votre navigateur web et entrez l'URL suivante : http://your_ip:8080 (remplacez your_ip par l'adresse IP de votre SmartPi1).
+Connectez-vous avec les identifiants suivants :
+Nom d'utilisateur : admin
+Mot de passe : admin
+Naviguez vers le dossier des ROMs et téléchargez vos fichiers de jeux.
+Cette fonctionnalité vous offre une méthode simple et rapide pour gérer vos ROMs sans avoir à utiliser des outils de transfert de fichiers séparés.
 
-YumiOS is an operating system made for usage with our products and in 3D Printer space.
+Support et Contributions
+Si vous rencontrez des problèmes ou avez des suggestions, n'hésitez pas à ouvrir une issue sur notre page GitHub. Les contributions sont également les bienvenues ! Consultez notre guide de contribution pour plus d'informations.
 
-Therefor it includes everything to get started with Klipper Firmware and Mainsail on your 3D printer.
-
-Learn more about:
-
--   [Klipper Firmware](https://www.klipper3d.org/)
--   [Moonraker](https://moonraker.readthedocs.io/en/latest/)
--   [Mainsail](https://docs.mainsail.xyz/)
-
-## How to install YumiOS ?
-
-You can find detailed instructions in our [documentation](https://wiki.yumi-lab.com/).
-
-We recommend the installation via [Balena Etcher](https://etcher.balena.io/).
-
-## What is included?
-
-Here a list of included and preinstalled Software:
-
--   [Klipper (3D Printer Firmware)](https://github.com/Klipper3d/klipper)
--   [Moonraker (API Web Server for Klipper)](https://github.com/Arksine/moonraker)
--   [Mainsail (Web interface for Klipper/Moonraker)](https://github.com/mainsail-crew/mainsail)
--   [Crowsnest (Webcam streaming)](https://github.com/mainsail-crew/crowsnest)
--   [Sonar (Keepalive daemon)](https://github.com/mainsail-crew/sonar)
--   [Nginx (Webserver & Proxy)](https://nginx.org/en/)
-
-## Screenshots
-
-![screenshot-dashboard](https://github.com/mainsail-crew/docs/raw/master/assets/img/screenshot.png)
+Remerciements
+Nous tenons à remercier la communauté RetroPie pour leur travail exceptionnel et leur dévouement, ainsi que tous les contributeurs qui ont aidé à adapter RetroPie pour le SmartPi1.
