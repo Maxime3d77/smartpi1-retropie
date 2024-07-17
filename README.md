@@ -57,3 +57,6 @@ Si vous rencontrez des problèmes ou avez des suggestions, n'hésitez pas à ouv
 
 ## Remerciements
 Nous tenons à remercier la communauté RetroPie pour leur travail exceptionnel et leur dévouement, ainsi que tous les contributeurs qui ont aidé à adapter RetroPie pour le SmartPi1.
+
+## Source
+Thanks https://retropie.org.uk/
