@@ -125,3 +125,10 @@ echo_green "Install filebrowser...(DONE)"
 echo_green "Install menu emulastation..."
 unpack /filesystem/root/RetroPie /
 echo_green "Install menu emulastation...(DONE)"
+
+echo_green "Install Music..."
+unpack /filesystem/home/pi/music_setup
+cd /home/pi/music_setup
+chmod +x setup.sh
+sudo ./setup.sh
+echo_green "Install Music...(DONE)"
