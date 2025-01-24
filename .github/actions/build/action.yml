@@ -118,6 +118,12 @@ runs:
       shell: bash
       run: cd repository/src && ../../CustomPiOS/src/update-custompios-paths
 
+    - name: Install Python dependencies
+      shell: bash
+      run: |
+        python3 -m pip install --upgrade pip
+        python3 -m pip install gitpython
+
     - name: Build Image
       shell: bash
       run: sudo modprobe loop && cd repository/src && sudo bash -x ./build_dist
