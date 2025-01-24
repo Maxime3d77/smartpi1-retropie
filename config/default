@@ -33,7 +33,11 @@ DIST_VERSION="$(get_version)"
 BASE_ZIP_IMG="$(get_img_name)"
 DIST_NAME="YumiOS"
 
+
+BASE_BOOT_MOUNT_PATH=boot ##############
+
 # export Variables
+export BASE_BOOT_MOUNT_PATH #########♣
 export DIST_NAME
 export DIST_VERSION
 export BASE_ZIP_IMG
