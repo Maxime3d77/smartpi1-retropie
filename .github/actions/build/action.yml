@@ -26,7 +26,7 @@ runs:
   steps:
     - name: Install Dependencies
       shell: bash
-      run: sudo apt update; sudo apt install --yes aria2 coreutils jq p7zip-full qemu-user-static zip
+      run: sudo apt update; sudo apt install --yes aria2 coreutils jq p7zip-full qemu-user-static zip python3 python3-pip
 
     - name: Checkout CustomPiOS
       uses: actions/checkout@v4
@@ -123,6 +123,10 @@ runs:
       run: |
         python3 -m pip install --upgrade pip
         python3 -m pip install gitpython
+
+    - name: List installed Python packages
+      shell: bash
+      run: python3 -m pip list
 
     - name: Build Image
       shell: bash
