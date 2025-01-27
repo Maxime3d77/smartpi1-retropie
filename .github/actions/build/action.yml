@@ -28,6 +28,22 @@ runs:
       shell: bash
       run: sudo apt update; sudo apt install --yes aria2 coreutils jq p7zip-full qemu-user-static zip python3 python3-pip
 
+    - name: Install Python dependencies
+      shell: bash
+      run: |
+        python3 -m pip install --upgrade pip
+        python3 -m pip install gitpython
+        python3 -m pip check  # Vérifie les conflits de dépendances
+
+    - name: List installed Python packages
+      shell: bash
+      run: python3 -m pip list
+
+    - name: Check Python version
+      shell: bash
+      run: python3 --version
+
+
     - name: Checkout CustomPiOS
       uses: actions/checkout@v4
       with:
@@ -117,16 +133,6 @@ runs:
     - name: Update CustomPiOS Paths
       shell: bash
       run: cd repository/src && ../../CustomPiOS/src/update-custompios-paths
-
-    - name: Install Python dependencies
-      shell: bash
-      run: |
-        python3 -m pip install --upgrade pip
-        python3 -m pip install gitpython
-
-    - name: List installed Python packages
-      shell: bash
-      run: python3 -m pip list
 
     - name: Build Image
       shell: bash
