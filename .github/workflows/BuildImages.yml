@@ -75,9 +75,19 @@ jobs:
           NOW="$(date +"%Y-%m-%d")"
           IMAGE="${NOW}-${DIST_NAME}-${DIST_VERSION}-${{ steps.build.outputs.type }}-${{ steps.build.outputs.sbc }}"
 
+          # Debugging permissions (optional)
+          echo "Debugging permissions in workspace:"
+          ls -la repository/src/workspace || echo "Workspace does not exist!"
+
+          # Fix permissions and ensure workspace is accessible
+          sudo chmod -R 777 repository/src/workspace
+          sudo chown -R $USER:$USER repository/src/workspace
+
+          # Move the image
           mv repository/src/workspace/*.img $IMAGE.img
 
           echo "image=${IMAGE}" >> $GITHUB_OUTPUT
+
 
       - name: Upload failed Logfile
         if: failure()
