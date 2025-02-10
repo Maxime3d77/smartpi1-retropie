@@ -66,6 +66,9 @@ jobs:
           config: ${{ matrix.config }}
           custompios-ref: 1.5.0
 
+      - name: Fix permissions
+        run: sudo chmod -R 777 repository/src/workspace
+
       - name: Rename image file
         id: move-image
         if: always()
@@ -84,7 +87,7 @@ jobs:
           sudo chown -R $USER:$USER repository/src/workspace
   
           # Move the image
-          mv repository/src/workspace/*.img $IMAGE.img
+          sudo mv repository/src/workspace/*.img $IMAGE.img
   
           echo "image=${IMAGE}" >> $GITHUB_OUTPUT
   
