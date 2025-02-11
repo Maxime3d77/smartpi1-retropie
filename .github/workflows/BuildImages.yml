@@ -30,7 +30,7 @@ concurrency:
 
 jobs:
   setup:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04 #ubuntu-latest
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
@@ -58,6 +58,10 @@ jobs:
         with:
           path: repository
           submodules: true
+
+      - name: Debug Log
+        if: failure()
+        run: cat repository/src/build.log
 
       - name: Build image
         id: build
