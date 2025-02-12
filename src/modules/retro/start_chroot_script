@@ -67,12 +67,15 @@ popd &>/dev/null
 
 echo_green "Install Yumi Lab Plymouth theme on SmartPad... [DONE]"
 
-
-echo_green "Install Retropie..."
-git clone https://github.com/Yumi-Lab/Retropie-smartpi.git
-cd Retropie-smartpi
-./install.sh
-echo_green "Install Retropie...(DONE)"
+echo_green "Update..."
+sudo apt-get update
+sudo apt-get upgrade -y
+echo_green "Update...(DONE)"
+#echo_green "Install Retropie..."
+#git clone https://github.com/Yumi-Lab/Retropie-smartpi.git
+#cd Retropie-smartpi
+#./install.sh
+#echo_green "Install Retropie...(DONE)"
 
 
 echo_green "Change name Retropie..."
