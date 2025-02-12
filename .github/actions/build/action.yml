@@ -133,21 +133,36 @@ runs:
     - name: Décompression de l’image
       shell: bash
       run: |
-        cd repository/src/image
-        ls -lah  # Vérifier les fichiers présents
+        echo "📂 Vérification des fichiers avant extraction :"
+        ls -lah repository/src/image || echo "⚠️ Dossier 'image/' introuvable !"
         
-        if [ -f "smartpad1-retro.img.xz" ]; then
-          echo "📦 Décompression de smartpad1-retro.img.xz..."
-          xz -d -v smartpad1-retro.img.xz
-          ls repository/src/image/
-          mv repository/src/image/*.img repository/src/workspace/
+        if [ ! -d "repository/src/workspace" ]; then
+            echo "📂 Création du dossier 'workspace/'..."
+            mkdir -p repository/src/workspace
+        fi
+        
+        if [ -f "repository/src/image/smartpad1-retro.img.xz" ]; then
+            echo "📦 Décompression de smartpad1-retro.img.xz..."
+            xz -d -v repository/src/image/smartpad1-retro.img.xz
         else
-          echo "❌ Fichier smartpad1-retro.img.xz introuvable !"
-          exit 1
+            echo "❌ Fichier smartpad1-retro.img.xz introuvable !"
+            exit 1
         fi
 
         echo "📂 Vérification après extraction :"
-        ls -lah
+        ls -lah repository/src/image/
+
+        if ls repository/src/image/*.img 1> /dev/null 2>&1; then
+            echo "🚀 Déplacement de l'image extraite vers 'workspace/'..."
+            mv repository/src/image/*.img repository/src/workspace/
+        else
+            echo "❌ Aucune image extraite trouvée !"
+            exit 1
+        fi
+
+        echo "📂 Vérification des fichiers après déplacement :"
+        ls -lah repository/src/workspace/
+
 
 
     - name: Update CustomPiOS Paths
