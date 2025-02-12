@@ -139,6 +139,7 @@ runs:
         if [ -f "smartpad1-retro.img.xz" ]; then
           echo "📦 Décompression de smartpad1-retro.img.xz..."
           xz -d -v smartpad1-retro.img.xz
+          ls repository/src/image/
           mv repository/src/image/*.img repository/src/workspace/
         else
           echo "❌ Fichier smartpad1-retro.img.xz introuvable !"
