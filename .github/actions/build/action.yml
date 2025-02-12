@@ -130,6 +130,24 @@ runs:
         cd repository/src/image
         sha256sum -b ${{ steps.checksum.outputs.FILENAME }}
 
+    - name: Décompression de l’image
+      shell: bash
+      run: |
+        cd repository/src/image
+        ls -lah  # Vérifier les fichiers présents
+        
+        if [ -f "smartpad1-retro.img.xz" ]; then
+          echo "📦 Décompression de smartpad1-retro.img.xz..."
+          xz -d -v smartpad1-retro.img.xz
+        else
+          echo "❌ Fichier smartpad1-retro.img.xz introuvable !"
+          exit 1
+        fi
+
+        echo "📂 Vérification après extraction :"
+        ls -lah
+
+
     - name: Update CustomPiOS Paths
       shell: bash
       run: cd repository/src && ../../CustomPiOS/src/update-custompios-paths
