@@ -76,6 +76,13 @@ runs:
         echo "DOWNLOAD_URL_IMAGE=${DOWNLOAD_URL_IMAGE}" >> $GITHUB_OUTPUT
         echo "MODULES=${MODULES}" >> $GITHUB_OUTPUT
 
+    - name: Debug: Vérification des URLs
+      shell: bash
+      run: |
+        echo "DEBUG: DOWNLOAD_URL_CHECKSUM = '${{ steps.config.outputs.DOWNLOAD_URL_CHECKSUM }}'"
+        echo "DEBUG: DOWNLOAD_URL_IMAGE = '${{ steps.config.outputs.DOWNLOAD_URL_IMAGE }}'"
+
+
     - name: Base Image Checksum
       id: checksum
       shell: bash
