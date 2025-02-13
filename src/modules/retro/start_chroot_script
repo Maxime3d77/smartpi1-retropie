@@ -27,6 +27,13 @@ is_board_type() {
     fi
     echo "${board}"
 }
+[[ -n "${BASE_USER}" ]] || BASE_USER="pi"  # Remplacez "pi" par l'utilisateur principal si nécessaire
+#[[ -n "$BASE_USER" ]] || BASE_USER="pi"  # Remplacez "pi" par l'utilisateur principal si nécessaire
+
+if ! command -v git &>/dev/null; then
+    echo "Git n'est pas installé, veuillez l'installer avant de continuer."
+    exit 1
+fi
 
 echo_green "Apply SmartPad specific patches..."
 unpack /filesystem/root /
@@ -52,12 +59,20 @@ smartpad_install_theme() {
     local src dest
     dest="/usr/share/plymouth/themes/"
     src="/home/${BASE_USER}/$(basename "${SMARTPAD_PLYMOUTH_REPO/.git/}")"
-    src="${src}/pack_3/pixels"
+    src="${src}/pack_2/hexagon_alt"
     if [[ -d "${src}" ]]; then
         sudo cp -vr "${src}" "${dest}"
     fi
     echo_green "Set default theme to ${SMARTPAD_PLYMOUTH_THEME} ..."
     sudo plymouth-set-default-theme "${SMARTPAD_PLYMOUTH_THEME}"
+
+    if [[ -d "${src}" ]]; then
+    echo "Clonage réussi et thème disponible pour installation."
+else
+    echo "Erreur: Thème Plymouth introuvable après clonage."
+    exit 1
+fi
+
 }
 
 pushd "/home/${BASE_USER}" &>/dev/null
@@ -68,8 +83,10 @@ popd &>/dev/null
 echo_green "Install Yumi Lab Plymouth theme on SmartPad... [DONE]"
 
 echo_green "Update..."
+
 sudo apt-get update
 sudo apt-get upgrade -y
+
 echo_green "Update...(DONE)"
 #echo_green "Install Retropie..."
 #git clone https://github.com/Yumi-Lab/Retropie-smartpi.git
@@ -135,3 +152,7 @@ cd /home/pi/music_setup
 chmod +x setup.sh
 sudo ./setup.sh
 echo_green "Install Music...(DONE)"
+
+echo_green "Enable first boot service..."
+sudo chmod +x /usr/local/bin/firstboot
+systemctl_if_exists enable firstboot.service
