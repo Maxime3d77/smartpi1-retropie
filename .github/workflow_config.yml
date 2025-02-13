@@ -36,7 +36,7 @@ release:
   # armbian based images
   #- armbian/orangepi3lts
   #- armbian/orangepi4lts
-  - armbian/smartpad
+  - armbian/yumiretropi
   #- armbian/smartpi
   # Orange Pi OS based images
   #- orangepi/orangepi_zero2

@@ -1,6 +1,6 @@
-name: "MainsailOS/build"
-author: "Stefan Dej"
-description: "Build MainsailOS images"
+name: "RetroMi/build"
+author: "Maxime3d77"
+description: "Build RetroMi images"
 inputs:
   config:
     description: "Board config name"
@@ -75,13 +75,6 @@ runs:
         echo "DOWNLOAD_URL_CHECKSUM=${DOWNLOAD_URL_CHECKSUM}" >> $GITHUB_OUTPUT
         echo "DOWNLOAD_URL_IMAGE=${DOWNLOAD_URL_IMAGE}" >> $GITHUB_OUTPUT
         echo "MODULES=${MODULES}" >> $GITHUB_OUTPUT
-
-    - name: check URLs
-      shell: bash
-      run: |
-        echo "DEBUG: DOWNLOAD_URL_CHECKSUM = '${{ steps.config.outputs.DOWNLOAD_URL_CHECKSUM }}'"
-        echo "DEBUG: DOWNLOAD_URL_IMAGE = '${{ steps.config.outputs.DOWNLOAD_URL_IMAGE }}'"
-
 
     - name: Base Image Checksum
       id: checksum
