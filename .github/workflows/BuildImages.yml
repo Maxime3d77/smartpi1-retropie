@@ -30,7 +30,7 @@ concurrency:
 
 jobs:
   setup:
-    runs-on: ubuntu-22.04 #ubuntu-latest
+    runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
@@ -58,10 +58,6 @@ jobs:
         with:
           path: repository
           submodules: true
- 
-      - name: Debug Log
-        if: failure()
-        run: cat repository/src/build.log
 
       - name: Build image
         id: build
@@ -69,13 +65,6 @@ jobs:
         with:
           config: ${{ matrix.config }}
           custompios-ref: 1.5.0
-
-      - name: Fix permissions
-        run: 
-         sudo chmod -R 777 repository/src/workspace
-         sudo chown -R $(whoami):$(whoami) repository/src/workspace
-         sudo chmod -R u+rwX,g+rwX,o+rwX repository/src/workspace
-
 
       - name: Rename image file
         id: move-image
@@ -85,21 +74,10 @@ jobs:
           source repository/src/config
           NOW="$(date +"%Y-%m-%d")"
           IMAGE="${NOW}-${DIST_NAME}-${DIST_VERSION}-${{ steps.build.outputs.type }}-${{ steps.build.outputs.sbc }}"
-  
-          # Debugging permissions
-          echo "Debugging permissions in workspace:"
-          ls -la repository/src/workspace || echo "Workspace does not exist!"
-  
-          # Fix permissions
-          sudo chmod -R 777 repository/src/workspace
-          sudo chown -R $USER:$USER repository/src/workspace
-  
-          # Move the image
-          sudo mv repository/src/workspace/*.img $IMAGE.img
-  
-          echo "image=${IMAGE}" >> $GITHUB_OUTPUT
-  
 
+          mv repository/src/workspace/*.img $IMAGE.img
+
+          echo "image=${IMAGE}" >> $GITHUB_OUTPUT
 
       - name: Upload failed Logfile
         if: failure()

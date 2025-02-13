@@ -26,23 +26,7 @@ runs:
   steps:
     - name: Install Dependencies
       shell: bash
-      run: sudo apt update; sudo apt install --yes aria2 coreutils jq p7zip-full qemu-user-static zip python3 python3-pip
-
-    - name: Install Python dependencies
-      shell: bash
-      run: |
-        python3 -m pip install --upgrade pip
-        python3 -m pip install gitpython
-        python3 -m pip check  # Vérifie les conflits de dépendances
-
-    - name: List installed Python packages
-      shell: bash
-      run: python3 -m pip list
-
-    - name: Check Python version
-      shell: bash
-      run: python3 --version
-
+      run: sudo apt update; sudo apt install --yes aria2 coreutils jq p7zip-full qemu-user-static zip
 
     - name: Checkout CustomPiOS
       uses: actions/checkout@v4
@@ -129,59 +113,6 @@ runs:
       run: |
         cd repository/src/image
         sha256sum -b ${{ steps.checksum.outputs.FILENAME }}
-
-      - name: Décompression et déplacement de l’image
-      shell: bash
-      run: |
-        echo "📂 Vérification des fichiers avant extraction :"
-        ls -lah repository/src/image || echo "⚠️ Dossier 'image/' introuvable !"
-
-        # 🔹 Création des dossiers avec permissions 777
-        if [ ! -d "repository/src/workspace" ]; then
-            echo "📂 Création du dossier 'workspace/'..."
-            sudo mkdir -p repository/src/workspace
-            sudo chmod 777 repository/src/workspace
-        fi
-
-        if [ ! -d "repository/src/image" ]; then
-            echo "📂 Création du dossier 'image/'..."
-            sudo mkdir -p repository/src/image
-            sudo chmod 777 repository/src/image
-        fi
-
-        # 🔹 Vérification et décompression de l’image
-        if [ -f "repository/src/image/smartpad1-retro.img.xz" ]; then
-            echo "📦 Décompression de smartpad1-retro.img.xz..."
-            sudo xz -d -v repository/src/image/smartpad1-retro.img.xz
-            sync  # Assurer que l'écriture sur le disque est terminée
-        else
-            echo "❌ Fichier smartpad1-retro.img.xz introuvable !"
-            exit 1
-        fi
-
-        echo "📂 Vérification après extraction :"
-        ls -lah repository/src/image/
-
-        # 🔹 Vérification et déplacement de l’image extraite
-        if ls repository/src/image/*.img 1> /dev/null 2>&1; then
-            echo "🚀 Déplacement de l'image extraite vers 'workspace/'..."
-            sudo mv repository/src/image/*.img repository/src/workspace/
-            sync  # Sécurisation de l'écriture des fichiers
-        else
-            echo "❌ Aucune image extraite trouvée !"
-            exit 1
-        fi
-
-        # 🔹 Correction des permissions après déplacement
-        echo "🛠️ Correction des permissions sur 'workspace/' et 'image/'"
-        sudo chmod -R 777 repository/src/workspace
-        sudo chmod -R 777 repository/src/image
-        sudo chown -R $(whoami):$(whoami) repository/src/workspace
-        sudo chown -R $(whoami):$(whoami) repository/src/image
-
-        echo "📂 Vérification des fichiers après déplacement :"
-        ls -lah repository/src/workspace/
-
 
     - name: Update CustomPiOS Paths
       shell: bash
