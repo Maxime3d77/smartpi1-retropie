@@ -76,7 +76,7 @@ runs:
         echo "DOWNLOAD_URL_IMAGE=${DOWNLOAD_URL_IMAGE}" >> $GITHUB_OUTPUT
         echo "MODULES=${MODULES}" >> $GITHUB_OUTPUT
 
-    - name: Debug: Vérification des URLs
+    - name: check URLs
       shell: bash
       run: |
         echo "DEBUG: DOWNLOAD_URL_CHECKSUM = '${{ steps.config.outputs.DOWNLOAD_URL_CHECKSUM }}'"
