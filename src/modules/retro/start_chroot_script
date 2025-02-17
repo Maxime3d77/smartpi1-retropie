@@ -58,13 +58,13 @@ echo_green "Install Yumi Lab Plymouth theme on SmartPad..."
 smartpad_install_theme() {
     local src dest
     dest="/usr/share/plymouth/themes/"
-    src="/home/${BASE_USER}/$(basename "${SMARTPAD_PLYMOUTH_REPO/.git/}")"
+    src="/home/${BASE_USER}/$(basename "${"https://github.com/Yumi-Lab/plymouth-themes.git"/.git/}")"
     src="${src}/pack_2/hexagon_alt"
     if [[ -d "${src}" ]]; then
         sudo cp -vr "${src}" "${dest}"
     fi
-    echo_green "Set default theme to ${SMARTPAD_PLYMOUTH_THEME} ..."
-    sudo plymouth-set-default-theme "${SMARTPAD_PLYMOUTH_THEME}"
+    echo_green "Set default theme to ${"pixels"} ..."
+    sudo plymouth-set-default-theme "${"pixels"}"
 
     if [[ -d "${src}" ]]; then
     echo "Clonage réussi et thème disponible pour installation."
@@ -76,7 +76,7 @@ fi
 }
 
 pushd "/home/${BASE_USER}" &>/dev/null
-sudo -u "${BASE_USER}" git clone "${SMARTPAD_PLYMOUTH_REPO}"
+sudo -u "${BASE_USER}" git clone "${"https://github.com/Yumi-Lab/plymouth-themes.git"}"
 smartpad_install_theme
 popd &>/dev/null
 
