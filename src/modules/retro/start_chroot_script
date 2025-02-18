@@ -8,6 +8,8 @@
 #### This File is distributed under GPLv3
 ####
 
+
+
 # shellcheck enable=require-variable-braces
 # Source error handling, leave this in place
 set -Ee
@@ -15,6 +17,12 @@ set -Ee
 # Source CustomPIOS common.sh
 # shellcheck disable=SC1091
 source /common.sh
+
+#Variables
+[[ -z "$SMARTPAD_PLYMOUTH_REPO" ]] && SMARTPAD_PLYMOUTH_REPO="https://github.com/Yumi-Lab/plymouth-themes.git"
+[[ -z "$SMARTPAD_PLYMOUTH_THEME" ]] && SMARTPAD_PLYMOUTH_THEME="pixels"
+
+
 install_cleanup_trap
 
 ### Helper func
@@ -58,21 +66,21 @@ echo_green "Install Yumi Lab Plymouth theme on SmartPad..."
 smartpad_install_theme() {
     local src dest
     dest="/usr/share/plymouth/themes/"
-    src="/home/${BASE_USER}/$(basename "${SMARTPAD_PLYMOUTH_REPO/.git/}")"
-    src="${src}/pack_2/hexagon_alt"
+    src="/home/${BASE_USER}/$(basename "${SMARTPAD_PLYMOUTH_REPO}" .git)/pack_2/hexagon_alt"
+
     if [[ -d "${src}" ]]; then
         sudo cp -vr "${src}" "${dest}"
     fi
+
     echo_green "Set default theme to ${SMARTPAD_PLYMOUTH_THEME} ..."
-    sudo plymouth-set-default-theme "${SMARTPAD_PLYMOUTH_THEME}"
+    sudo plymouth-set-default-theme "${SMARTPAD_PLYMOUTH_THEME}" -R
 
     if [[ -d "${src}" ]]; then
-    echo "Clonage réussi et thème disponible pour installation."
-else
-    echo "Erreur: Thème Plymouth introuvable après clonage."
-    exit 1
-fi
-
+        echo "Clonage réussi et thème disponible pour installation."
+    else
+        echo "Erreur: Thème Plymouth introuvable après clonage."
+        exit 1
+    fi
 }
 
 pushd "/home/${BASE_USER}" &>/dev/null
