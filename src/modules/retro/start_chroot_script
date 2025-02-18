@@ -66,7 +66,7 @@ echo_green "Install Yumi Lab Plymouth theme on SmartPad..."
 smartpad_install_theme() {
     local src dest
     dest="/usr/share/plymouth/themes/"
-    src="/home/${BASE_USER}/$(basename "${SMARTPAD_PLYMOUTH_REPO}" .git)/pack_2/hexagon_alt"
+    src="/home/${BASE_USER}/$(basename "${SMARTPAD_PLYMOUTH_REPO}" .git)/pack_3/pixels"
 
     if [[ -d "${src}" ]]; then
         sudo cp -vr "${src}" "${dest}"
