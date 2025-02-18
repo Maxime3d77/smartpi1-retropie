@@ -19,8 +19,8 @@ set -Ee
 source /common.sh
 
 #Variables
-[[ -z "$SMARTPAD_PLYMOUTH_REPO" ]] && SMARTPAD_PLYMOUTH_REPO="https://github.com/Yumi-Lab/plymouth-themes.git"
-[[ -z "$SMARTPAD_PLYMOUTH_THEME" ]] && SMARTPAD_PLYMOUTH_THEME="pixels"
+[[ -z "${SMARTPAD_PLYMOUTH_REPO}" ]] && SMARTPAD_PLYMOUTH_REPO="https://github.com/Yumi-Lab/plymouth-themes.git"
+[[ -z "${SMARTPAD_PLYMOUTH_THEME}" ]] && SMARTPAD_PLYMOUTH_THEME="pixels"
 
 
 install_cleanup_trap
