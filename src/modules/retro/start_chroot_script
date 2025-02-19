@@ -113,18 +113,20 @@ sudo sed -i "s/$(hostname)/${NEW_HOSTNAME}/g" /etc/hosts
 echo_green "Change name Retropie...(DONE)"
 
 echo_green "Install filebrowser..."
+echo "download filebrowser"
 sudo curl -fsSL https://raw.githubusercontent.com/filebrowser/get/master/get.sh | bash 
 # Création et configuration du fichier database
-
+echo "Création et configuration du fichier database"
 sudo mkdir -p /var/lib/filebrowser
 sudo touch /var/lib/filebrowser/filebrowser.db
 sudo chmod 777 /var/lib/filebrowser/filebrowser.db
 sudo chown root:root /var/lib/filebrowser/filebrowser.db
-
 sudo filebrowser -r /root/RetroPie/
 #activer les ip sinon par défaut juste local
+echo "#activer les ip sinon par défaut juste local"
 sudo filebrowser -d filebrowser.db config set --address 0.0.0.0
 # Créer le script bash pour démarrer FileBrowser avec les commandes nécessaires
+echo "# Créer le script bash pour démarrer FileBrowser avec les commandes nécessaires"
 cat << 'EOF' > /usr/local/bin/start_filebrowser.sh
 #!/bin/bash
 #filebrowser -d filebrowser.db config set --address 0.0.0.0
@@ -132,8 +134,10 @@ filebrowser -d /var/lib/filebrowser/filebrowser.db config set --address 0.0.0.0
 filebrowser -r /root/RetroPie/
 EOF
 # Rendre le script exécutable
+echo "# Rendre le script exécutable"
 sudo chmod +x /usr/local/bin/start_filebrowser.sh
 # Créer le fichier de service systemd
+echo "Créer le fichier de service systemd"
 cat << 'EOF' > /etc/systemd/system/filebrowser.service
 [Unit]
 Description=FileBrowser Service
@@ -149,8 +153,10 @@ Group=root
 WantedBy=multi-user.target
 EOF
 # Recharger les services systemd pour prendre en compte le nouveau fichier de service
+echo "# Recharger les services systemd pour prendre en compte le nouveau fichier de service"
 sudo systemctl daemon-reload
 # Activer le service pour qu'il démarre automatiquement au démarrage du système
+echo "# Activer le service pour qu'il démarre automatiquement au démarrage du système"
 sudo systemctl enable filebrowser.service
 # Démarrer le service immédiatement
 #sudo systemctl start filebrowser.service
