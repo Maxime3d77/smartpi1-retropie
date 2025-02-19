@@ -114,13 +114,21 @@ echo_green "Change name Retropie...(DONE)"
 
 echo_green "Install filebrowser..."
 sudo curl -fsSL https://raw.githubusercontent.com/filebrowser/get/master/get.sh | bash 
+# Création et configuration du fichier database
+
+sudo mkdir -p /var/lib/filebrowser
+sudo touch /var/lib/filebrowser/filebrowser.db
+sudo chmod 777 /var/lib/filebrowser/filebrowser.db
+sudo chown root:root /var/lib/filebrowser/filebrowser.db
+
 sudo filebrowser -r /root/RetroPie/
-authauriser les ip sinon par défaut juste local
+#activer les ip sinon par défaut juste local
 filebrowser -d filebrowser.db config set --address 0.0.0.0
 # Créer le script bash pour démarrer FileBrowser avec les commandes nécessaires
 cat << 'EOF' > /usr/local/bin/start_filebrowser.sh
 #!/bin/bash
-filebrowser -d filebrowser.db config set --address 0.0.0.0
+#filebrowser -d filebrowser.db config set --address 0.0.0.0
+filebrowser -d /var/lib/filebrowser/filebrowser.db config set --address 0.0.0.0
 filebrowser -r /root/RetroPie/
 EOF
 # Rendre le script exécutable
@@ -164,3 +172,6 @@ echo_green "Install Music...(DONE)"
 echo_green "Enable first boot service..."
 sudo chmod +x /usr/local/bin/firstboot
 systemctl_if_exists enable firstboot.service
+echo_green "Enable first boot service...(DONE)"
+
+
