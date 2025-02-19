@@ -18,14 +18,14 @@ else
 	adult_music="NO"
 fi
 
-if [ $music_start == "1" ]
+if [ "$music_start" == "1" ];
 then
 	music_start="YES"
 else
 	music_start="NO"
 fi
 
-if [ $music_over_games == "1" ]
+if [ "$music_over_games" == "1" ];
 then
         music_over_games="YES"
 else
@@ -88,9 +88,9 @@ echo
 echo "				-- M U S I C  S E T T I N G S --"
 echo
 echo
-echo -e "				              Adult Music:"   ${GREEN}$adult_music${NC}
-echo -e "			 	    Start Music At Bootup:"   ${GREEN}$music_start${NC}
-echo -e -n "			Continue Playing Music Over Games:"   ${GREEN}$music_over_games${NC}
+echo -e "				              Adult Music:   ${GREEN}$adult_music${NC}"
+echo -e "			 	    Start Music At Bootup:   ${GREEN}$music_start${NC}"
+echo -e -n "			Continue Playing Music Over Games:   ${GREEN}$music_over_games${NC}"
 echo "  (Caution: EXPERIMENTAL. May cause instability)"
 echo
 echo
