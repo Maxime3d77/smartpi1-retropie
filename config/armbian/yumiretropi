@@ -12,7 +12,7 @@ DOWNLOAD_URL_CHECKSUM="${DOWNLOAD_BASE_URL}/smartpad1-retro.img.xz.sha256"
 DOWNLOAD_URL_IMAGE="${DOWNLOAD_BASE_URL}/smartpad1-retro.img.xz"
 
 BASE_IMAGE_ENLARGEROOT=6000
-MODULES="base(pkgupgrade,udev_fix,armbian(armbian_net,yumios,retro))"
+MODULES="base(pkgupgrade,udev_fix,armbian(armbian_net,yumios,retro,sunxi))"
 
 # export Variables
 export BASE_ARCH

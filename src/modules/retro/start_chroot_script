@@ -153,7 +153,7 @@ sudo systemctl daemon-reload
 # Activer le service pour qu'il démarre automatiquement au démarrage du système
 sudo systemctl enable filebrowser.service
 # Démarrer le service immédiatement
-sudo systemctl start filebrowser.service
+#sudo systemctl start filebrowser.service
 # Afficher l'état du service
 #sudo systemctl status filebrowser.service
 echo_green "Install filebrowser...(DONE)"
