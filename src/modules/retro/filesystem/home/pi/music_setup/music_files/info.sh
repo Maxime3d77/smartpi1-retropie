@@ -1,7 +1,9 @@
 #!/bin/bash
 
-RED='\033[0;31m'
-GREEN='\033[0;32m'
+export RED='\033[0;31m'
+export YEL='\033[1;33m'
+#RED='\033[0;31m'
+#GREEN='\033[0;32m'
 YEL='\033[1;33m'
 NC='\033[0m'        #No Color
 
@@ -9,7 +11,7 @@ adult_music=$(cat /home/pi/music_settings/adult_songs/onoff.flag)
 music_start=$(cat /home/pi/music_settings/onoff.flag)
 music_over_games=$(cat /home/pi/music_settings/music_over_games/onoff.flag)
 
-if [ $adult_music == "1" ]
+if [ "$adult_music" == "1" ]
 then
 	adult_music="YES"
 else
