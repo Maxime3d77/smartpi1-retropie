@@ -24,10 +24,10 @@ TARGET_KERNEL="6.6.16-current-sunxi"
 CURRENT_KERNEL=$(uname -r)
 
 echo "Vérification de la version actuelle du kernel..."
-echo "Kernel actuel : $CURRENT_KERNEL"
-echo "Kernel souhaité : $TARGET_KERNEL"
+echo "Kernel actuel : ${CURRENT_KERNEL}"
+echo "Kernel souhaité : ${TARGET_KERNEL}"
 
-if [ "$CURRENT_KERNEL" != "$TARGET_KERNEL" ]; then
+if [ "${CURRENT_KERNEL}" != "${TARGET_KERNEL}" ]; then
     echo "Le kernel actuel ne correspond pas. Correction en cours..."
     
     # Supprimer les headers et le kernel actuels s'ils sont incorrects
