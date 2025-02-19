@@ -21,7 +21,8 @@ echo "Unpack"
 unpack /filesystem/home/pi/kernel-offline
 echo "traitement fichier deb"
 cd /home/pi/kernel-offline
-sudo dpkg -i *.deb
+sudo dpkg -i -- ./*.deb
+
 
 
 echo "Créer le script bash pour header"
