@@ -125,7 +125,7 @@ sudo filebrowser -r /root/RetroPie/
 #activer les ip sinon par défaut juste local
 sudo filebrowser -d filebrowser.db config set --address 0.0.0.0
 # Créer le script bash pour démarrer FileBrowser avec les commandes nécessaires
-sudo cat << 'EOF' > /usr/local/bin/start_filebrowser.sh
+cat << 'EOF' > /usr/local/bin/start_filebrowser.sh
 #!/bin/bash
 #filebrowser -d filebrowser.db config set --address 0.0.0.0
 filebrowser -d /var/lib/filebrowser/filebrowser.db config set --address 0.0.0.0
@@ -134,7 +134,7 @@ EOF
 # Rendre le script exécutable
 sudo chmod +x /usr/local/bin/start_filebrowser.sh
 # Créer le fichier de service systemd
-sudo cat << 'EOF' > /etc/systemd/system/filebrowser.service
+cat << 'EOF' > /etc/systemd/system/filebrowser.service
 [Unit]
 Description=FileBrowser Service
 After=network.target
