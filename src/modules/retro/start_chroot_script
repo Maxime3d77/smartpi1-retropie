@@ -121,7 +121,7 @@ sudo mkdir -p /var/lib/filebrowser
 sudo touch /var/lib/filebrowser/filebrowser.db
 sudo chmod 777 /var/lib/filebrowser/filebrowser.db
 sudo chown root:root /var/lib/filebrowser/filebrowser.db
-sudo filebrowser -r /root/RetroPie/
+#sudo filebrowser -r /root/RetroPie/
 #activer les ip sinon par défaut juste local
 echo "#activer les ip sinon par défaut juste local"
 sudo filebrowser -d filebrowser.db config set --address 0.0.0.0
