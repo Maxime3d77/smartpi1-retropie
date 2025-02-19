@@ -159,13 +159,13 @@ sudo systemctl start filebrowser.service
 echo_green "Install filebrowser...(DONE)"
 
 echo_green "Install menu emulastation..."
-unpack /filesystem/root/RetroPie /
+unpack /filesystem/home/pi/RetroPie /
 echo_green "Install menu emulastation...(DONE)"
 
 echo_green "Install Music..."
 unpack /filesystem/home/pi/music_setup
-cd /home/pi/music_setup
-chmod +x setup.sh
+cd //home/pi/music_setup/music_files/
+sudo chmod +x setup.sh
 sudo ./setup.sh
 echo_green "Install Music...(DONE)"
 
