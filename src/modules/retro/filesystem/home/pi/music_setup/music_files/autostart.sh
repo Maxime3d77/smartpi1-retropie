@@ -15,7 +15,7 @@ sleep 2
 mpg123 -Z /home/pi/RetroPie/music/*.mp3 > /dev/null 2>&1 &
 
 #If "music off at bootup" is selected then disable it
-if [ "$(cat /home/pi/music_settings/onoff.flag)" == "0" ]
+if [ "$(cat /home/pi/music_settings/onoff.flag)" == "0" ]; then
 	pkill -STOP mpg123
 fi
 
