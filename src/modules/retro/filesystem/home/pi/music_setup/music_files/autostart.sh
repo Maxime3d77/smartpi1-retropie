@@ -1,5 +1,5 @@
 #disables/enables adult music
-if [ "$(cat /home/pi/music_settings/adult_songs/onoff.flag)" == "0" ]; then
+if [ "$(cat /home/pi/music_settings/adult_songs/onoff.flag)" == "0" ];
 then
         mv /home/pi/RetroPie/music/ADULT-*.mp3 /home/pi/RetroPie/music-adult/ 2>/dev/null
 else
