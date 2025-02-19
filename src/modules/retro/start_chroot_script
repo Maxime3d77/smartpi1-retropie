@@ -123,18 +123,18 @@ sudo chown root:root /var/lib/filebrowser/filebrowser.db
 
 sudo filebrowser -r /root/RetroPie/
 #activer les ip sinon par défaut juste local
-filebrowser -d filebrowser.db config set --address 0.0.0.0
+sudo filebrowser -d filebrowser.db config set --address 0.0.0.0
 # Créer le script bash pour démarrer FileBrowser avec les commandes nécessaires
-cat << 'EOF' > /usr/local/bin/start_filebrowser.sh
+sudo cat << 'EOF' > /usr/local/bin/start_filebrowser.sh
 #!/bin/bash
 #filebrowser -d filebrowser.db config set --address 0.0.0.0
 filebrowser -d /var/lib/filebrowser/filebrowser.db config set --address 0.0.0.0
 filebrowser -r /root/RetroPie/
 EOF
 # Rendre le script exécutable
-chmod +x /usr/local/bin/start_filebrowser.sh
+sudo chmod +x /usr/local/bin/start_filebrowser.sh
 # Créer le fichier de service systemd
-cat << 'EOF' > /etc/systemd/system/filebrowser.service
+sudo cat << 'EOF' > /etc/systemd/system/filebrowser.service
 [Unit]
 Description=FileBrowser Service
 After=network.target
@@ -149,13 +149,13 @@ Group=root
 WantedBy=multi-user.target
 EOF
 # Recharger les services systemd pour prendre en compte le nouveau fichier de service
-systemctl daemon-reload
+sudo systemctl daemon-reload
 # Activer le service pour qu'il démarre automatiquement au démarrage du système
-systemctl enable filebrowser.service
+sudo systemctl enable filebrowser.service
 # Démarrer le service immédiatement
-systemctl start filebrowser.service
+sudo systemctl start filebrowser.service
 # Afficher l'état du service
-systemctl status filebrowser.service
+#sudo systemctl status filebrowser.service
 echo_green "Install filebrowser...(DONE)"
 
 echo_green "Install menu emulastation..."
