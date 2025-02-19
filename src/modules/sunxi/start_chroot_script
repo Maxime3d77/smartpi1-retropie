@@ -17,39 +17,53 @@ set -Ee
 
 #!/bin/bash
 
-# Définir la version souhaitée du kernel
-TARGET_KERNEL="6.6.16-current-sunxi"
+echo "Unpack"
+unpack /filesystem/home/pi/kernel-offline
+echo "traitement fichier deb"
+cd /home/pi/kernel-offline
+sudo dpkg -i *.deb
 
-# Récupérer la version actuelle du kernel
+
+echo "Créer le script bash pour header"
+cat << 'EOF' > /root/fix_kernel.sh
+#!/bin/bash
+
+TARGET_KERNEL="6.6.16-current-sunxi"
 CURRENT_KERNEL=$(uname -r)
 
-echo "Vérification de la version actuelle du kernel..."
-echo "Kernel actuel : ${CURRENT_KERNEL}"
-echo "Kernel souhaité : ${TARGET_KERNEL}"
+echo "[🐳|🔨] Vérification du kernel actuel..."
+echo "[🐳|🔨] Kernel actuel : $CURRENT_KERNEL"
+echo "[🐳|🔨] Kernel souhaité : $TARGET_KERNEL"
 
-if [ "${CURRENT_KERNEL}" != "${TARGET_KERNEL}" ]; then
-    echo "Le kernel actuel ne correspond pas. Correction en cours..."
+if [ "$CURRENT_KERNEL" != "$TARGET_KERNEL" ]; then
+    echo "[🐳|🔨] Le kernel actuel ne correspond pas. Correction en cours..."
     
-    # Supprimer les headers et le kernel actuels s'ils sont incorrects
-    sudo apt remove --purge -y linux-image-current-sunxi linux-headers-current-sunxi linux-libc-dev
-    
-    # Réinstaller la bonne version
-    sudo apt install -y linux-image-current-sunxi=24.2.1 linux-headers-current-sunxi=24.2.1
-    
-    # Mettre à jour GRUB
-    echo "Mise à jour de GRUB..."
-    sudo update-grub
-    
-    echo "Redémarrage du système..."
+    # Installation offline du kernel
+    if [ -d "/root/kernel-offline" ]; then
+        echo "[🐳|🔨] Installation offline du kernel..."
+        sudo dpkg -i /root/kernel-offline/*.deb
+    else
+        echo "[❌] Dossier /root/kernel-offline introuvable !"
+        exit 1
+    fi
+
+    # Mise à jour GRUB si présent
+    if command -v update-grub &>/dev/null; then
+        echo "[🐳|🔨] Mise à jour de GRUB..."
+        sudo update-grub
+    else
+        echo "[⚠️] GRUB non trouvé, ignoré."
+    fi
+
+    echo "[🐳|🔨] Redémarrage du système..."
     sudo reboot
 else
-    echo "Le kernel est déjà correct. Blocage des mises à jour..."
+    echo "[🐳|🔨] Le kernel est correct. Blocage des mises à jour..."
     
-    # Bloquer la mise à jour du kernel et des headers
+    # Bloquer les mises à jour
     sudo apt-mark hold linux-image-current-sunxi linux-headers-current-sunxi linux-libc-dev
-    
-    # Empêcher les mises à jour avec un fichier de préférences
-    echo "Création du fichier de préférences APT..."
+
+    echo "[🐳|🔨] Création du fichier de préférences APT..."
     sudo bash -c 'cat <<EOF > /etc/apt/preferences.d/no-kernel-upgrade
 Package: linux-image-*
 Pin: release *
@@ -64,5 +78,30 @@ Pin: release *
 Pin-Priority: -1
 EOF'
 
-    echo "Le kernel est maintenant verrouillé et ne sera plus mis à jour."
+    echo "[🐳|🔨] Suppression du script pour éviter qu'il ne tourne à chaque démarrage..."
+    sudo rm -f /etc/init.d/fix_kernel
+    sudo rm -f /root/fix_kernel.sh
 fi
+
+EOF
+
+sudo chmod +x /root/fix_kernel.sh
+
+echo "Automatiser l'exécution au premier boot"
+cat << 'EOF' > /etc/init.d/fix_kernel
+#!/bin/bash
+### BEGIN INIT INFO
+# Provides:          fix_kernel
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Fix kernel on first boot
+### END INIT INFO
+
+/root/fix_kernel.sh
+
+EOF
+
+sudo chmod +x /etc/init.d/fix_kernel
+sudo update-rc.d fix_kernel defaults
