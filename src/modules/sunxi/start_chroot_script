@@ -12,13 +12,17 @@
 ####
 
 # shellcheck enable=require-variable-braces
-## Source error handling, leave this in place
+# Source error handling, leave this in place
 set -Ee
 
-#!/bin/bash
+# Source CustomPIOS common.sh
+# shellcheck disable=SC1091
+source /common.sh
 
+#!/bin/bash
+echo_green "Install sunxi..."
 echo "Unpack"
-unpack /filesystem/home/pi/kernel-offline
+unpack /filesystem/home/pi/ /home/pi
 echo "traitement fichier deb"
 cd /home/pi/kernel-offline
 sudo dpkg -i -- ./*.deb
@@ -106,3 +110,5 @@ EOF
 
 sudo chmod +x /etc/init.d/fix_kernel
 sudo update-rc.d fix_kernel defaults
+
+echo_green "Install sunxi (DONE)..."
