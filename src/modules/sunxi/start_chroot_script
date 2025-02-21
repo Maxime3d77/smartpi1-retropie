@@ -29,8 +29,8 @@ echo "Fix sunxi ..."
 
     echo "📥 Téléchargement des fichiers kernel depuis GitHub..."
 
-    curl -L -o /opt/kernel_deb/linux-image-current-sunxi.deb "$GITHUB_REPO/linux-image-current-sunxi_24.2.1_armhf.deb"
-    curl -L -o /opt/kernel_deb/linux-headers-current-sunxi.deb "$GITHUB_REPO/linux-headers-current-sunxi_24.2.1_armhf.deb"
+    curl -L -o /opt/kernel_deb/linux-image-current-sunxi.deb "${GITHUB_REPO}/linux-image-current-sunxi_24.2.1_armhf.deb"
+    curl -L -o /opt/kernel_deb/linux-headers-current-sunxi.deb "${GITHUB_REPO}/linux-headers-current-sunxi_24.2.1_armhf.deb"
 
     # Vérification des fichiers
     if [[ ! -f /opt/kernel_deb/linux-image-current-sunxi.deb || ! -f /opt/kernel_deb/linux-headers-current-sunxi.deb ]]; then
