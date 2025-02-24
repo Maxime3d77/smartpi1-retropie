@@ -19,15 +19,15 @@ clear
         if [ ! -f /opt/retropie/configs/all/autostart.sh.orig ] && [ -f /opt/retropie/configs/all/autostart.sh ]; then
             mv /opt/retropie/configs/all/autostart.sh /opt/retropie/configs/all/autostart.sh.orig
         fi
-        cp music_files/autostart.sh /opt/retropie/configs/all/
+        cp /home/pi/music_setup/music_files/autostart.sh /opt/retropie/configs/all/
 
         # Copy other music-related files
-        cp music_files/*.sh /home/pi/RetroPie/retropiemenu/
+        cp /home/pi/music_setupmusic_files/*.sh /home/pi/RetroPie/retropiemenu/
 
         # Backup and replace runcommand files
         [ -f /opt/retropie/configs/all/runcommand-onstart.sh ] && mv /opt/retropie/configs/all/runcommand-onstart.sh /opt/retropie/configs/all/runcommand-onstart.sh.orig
         [ -f /opt/retropie/configs/all/runcommand-onend.sh ] && mv /opt/retropie/configs/all/runcommand-onend.sh /opt/retropie/configs/all/runcommand-onend.sh.orig
-        cp music_files/runcommand-on*.sh /opt/retropie/configs/all/
+        cp /home/pi/music_setupmusic_files/runcommand-on*.sh /opt/retropie/configs/all/
 
         # Install required packages
         sudo apt-get -y install mpg123
